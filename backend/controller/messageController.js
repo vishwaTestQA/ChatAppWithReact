@@ -1,6 +1,6 @@
-import cloudinary from "../config/cloudinary";
-import Message from "../model/message.model";
-import { User } from "../model/user.model";
+import cloudinary from "../config/cloudinary.js";
+import Message from "../model/message.model.js";
+import { User } from "../model/user.model.js";
 
 export const getUsersForSideBar = async(req, res) =>{
   //fetch all the users except ourself

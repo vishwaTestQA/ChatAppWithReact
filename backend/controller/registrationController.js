@@ -31,14 +31,15 @@ export const registerUser = async (req, res) =>{
     //create jwt token
     if(newUser){
       console.log('newUserId', newUser._id)
-      generateJwtToken(newUser._id, res);
+      const token = generateJwtToken(newUser._id, res);
+      console.log('token generated for registration', token)
       await newUser.save();
 
       res.status(201).json({
         _id: newUser._id,
         email: newUser.email,
         fullname: newUser.fullname,
-        profilePic: newUser.profilePic 
+        profilePic: newUser.profilePic   //initially its undefined
       })
     }else{
       res.status(400).json({message: "Invalid user data"})
