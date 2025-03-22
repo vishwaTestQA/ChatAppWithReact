@@ -40,16 +40,13 @@ export const ProfilePage = () => {
     };
 
     try {
-      console.log('start')
       const compressedFile = await imageCompression(file, options);
       // const base64 = await convertToBase64(compressedFile);
-
       reader.readAsDataURL(compressedFile);
 
       reader.onload = async() => {
       const base64Image = reader.result
       setSelectedImage(base64Image)
-      console.log('end')
       await updateProfilePic({profilePicFromUser: base64Image})
     }
     } catch (error) {
@@ -89,10 +86,10 @@ export const ProfilePage = () => {
         <User className='inline-block'/>
         <label>Full Name</label>
         </div>
-        <input type="text" className='' value={authUser.fullname} readOnly></input>
+        <input type="text"  value={authUser.fullname} readOnly></input>
       </div>
 
-      <div className=''>
+      <div>
         <div>
         <Mail className='inline-block'/>
         <label>Email Address</label>

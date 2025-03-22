@@ -1,0 +1,16 @@
+.item {
+  /* @apply w-24 h-24 bg-red-500 flex items-center justify-center text-white; */
+  @apply w-full h-16;
+}
+
+/* .root{
+  BG_COLOR_DARK: #00000061;
+  BG_COLOR_RETRO: #d2cc6fc6;
+  BG_COLOR_coffe: #73700a55;
+  BG_COLOR_SILVER: #e6ddddd2;
+  BG_COLOR_SMOKE: whitesmoke;
+
+  TEXT_COLOR_DARK: #333;
+  TEXT_COLOR_SMOKE: whitesmoke;
+  
+} */
