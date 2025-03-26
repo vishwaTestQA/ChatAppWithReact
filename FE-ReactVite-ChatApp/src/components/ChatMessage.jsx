@@ -5,14 +5,13 @@ export const ChatMessage = () => {
 
   const {messages} = useChatStore();
 
-  if(!messages){
+  console.log(messages)
+  if(messages.length===0){
     return <div>No chats to display</div>
   }
 
   console.log('retrived in chatMessage comp')
   return (
-    <div>{
-       <div>HI-{messages}</div>
-      }</div>
+       <div className='overflow-y-auto'>HI-{messages}</div>
   )
 }

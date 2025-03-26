@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 export const useChatStore = create((set)=> ({
    users:[],          //at first we have to fetch users, so its null
-   messages:null,
+   messages:[],
    selectedUser: null,      //while login at first we will see only empty welcome page 
    isUsersLoading: false,   //when fetching users to show loading
    isMessagesLoading: false,
@@ -30,7 +30,7 @@ export const useChatStore = create((set)=> ({
      set({isMessagesLoading:true})
      try {
        const response = await axiosInstance.get(`/message/${receiver_id}`)
-       set({messages : response.data, isMessagesLoading: false})
+       set({messages : response.data})
        toast.success('success message retrived')
       //  if(response.data.length>0){
       //   set({messages : response.data, isMessagesLoading: false})

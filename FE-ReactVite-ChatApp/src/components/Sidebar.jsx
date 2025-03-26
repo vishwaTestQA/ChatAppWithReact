@@ -20,20 +20,21 @@ export const Sidebar = () => {
   }
   // 
   return (
-    <div>
+    <div className='sidebar overflow-y-auto max-h-screen'>
       <aside className='p-2'>
         <div>{
             users.map(user => (
                 <div key={user._id} 
                 className={`flex w-24 h-20 items-center gap-3
-                  ${selectedUser?._id === user._id? "bg-base-200 ring-1 ring-base-300" : ""}
+                  ${selectedUser?._id === user._id ? "bg-base-200 ring-1 ring-base-300" : ""}
                   `}
                     onClick={()=>
-                      {
-                      if(selectedUser?._id !== user._id){
+                      // {
+                      // if(selectedUser?._id !== user._id){
                       setSelectedUser(user)
-                      }
-                      }}>
+                      // }
+                      // }
+                    }>
                     <div className='w-[30%]'>
                     <img src={user?.profilePic?.url || defaultImage} className='w-full h-auto rounded-full object-cover'/>
                     </div>

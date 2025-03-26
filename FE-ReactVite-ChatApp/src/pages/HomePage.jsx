@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useAuthStore } from '../store/useAuthStore';
 import { ProfilePage } from './ProfilePage';
-import { Settings } from 'lucide-react';
+import { Cross, Settings } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { useChatStore } from '../store/useChatStore';
 import defaultImage from '../img/default.jpg'
@@ -55,8 +55,7 @@ console.log('users in Homepage', users)
   // },[memoizedSelectedUser, isMessagesLoading])
 
   return (
-    <div className='mt-3 bg-base-200'>
-       <section>
+       <section className='homeChat mt-3 bg-base-200 w-full'>
        {/* {memoizedSidebar} */}
 {/*   
        {
@@ -68,9 +67,17 @@ console.log('users in Homepage', users)
        } */}
        {/* {memoizedChatContainer} */}
 
-       <Sidebar/>
-       {selectedUser && <ChatContainer/>}
+       <Sidebar className='sidebar'/>
+       {/* {selectedUser && <ChatContainer/>} */}
+       <header className='chatHeader flex items-center justify-around'>
+      <div className='flex flex-col w-full'>
+        <p>{selectedUser?.fullname}</p>
+        <p>active</p>
+      </div>
+      <div>
+        <Cross className='size-4'></Cross>
+      </div>
+    </header>
        </section>
-    </div>
   )
 }

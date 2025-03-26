@@ -8,7 +8,7 @@ export const ChatInput = () => {
     //handling sending message 
   }
   return (
-    <div>
+    <div className='flex gap-2'>
       <input type='text' onChange={e => setInpValue(e.target.value)} value={inpValue}></input>
       <button onClick={handleSendMessage}><Send className='size-4'></Send></button>
     </div>

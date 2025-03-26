@@ -6,15 +6,15 @@ const ChatHeader = () => {
   const {selectedUser} = useChatStore();
 
   return (
-    <div className='flex items-center justify-around'>
-      <div className='flex flex-col'>
+    <header className='flex items-center justify-around'>
+      <div className='flex flex-col w-full'>
         <p>{selectedUser?.fullname}</p>
         <p>active</p>
       </div>
       <div>
         <Cross className='size-4'></Cross>
       </div>
-    </div>
+    </header>
   )
 }
 

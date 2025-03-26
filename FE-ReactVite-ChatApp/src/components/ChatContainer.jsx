@@ -18,10 +18,10 @@ export const ChatContainer = () => {
   // )
 
   useEffect(() => {
-    if(selectedUser?._id){
+    // if(selectedUser?._id){
       getMessages(selectedUser._id);         //backend will automatically get our userId in
                                               //in the resp (user set when verifyJWT) so messages to that chat is displyed
-    }
+    // }
   }, [selectedUser._id, getMessages]);    //if the method(getMessage) is memoized then no
                                            //   need to give in dependency array
   if(isMessagesLoading){
@@ -35,9 +35,9 @@ export const ChatContainer = () => {
 
   return (
     <div>
-       <ChatHeader/>
-       <ChatMessage/>
-       <ChatInput/>
+       <ChatHeader className='chatHeader'/>
+       <ChatMessage className='chatMessage'/>
+       <ChatInput className='chatInput'/>
     </div>
   )
 }
