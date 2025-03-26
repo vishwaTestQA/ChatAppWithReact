@@ -30,7 +30,7 @@ const {customTheme, setCustomTheme} = useCustomThemeStore()
       paletteColor: ['plum','#77ece0a6','#915f02','#370e0e']
     },
     coffee: {
-      appColor: ['#73700a55', 'whitesmoke'],
+      appColor: ['#73700a55', '#f0e08796'],
       paletteColor: ['lightcoral','#083f08ac', '#226f5aac','#333'] 
     },
     wireframe: {

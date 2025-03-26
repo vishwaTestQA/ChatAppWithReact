@@ -26,8 +26,8 @@ export const verifyJWT = async (req, res, next) => {
 
   // console.log(user)
   res.user = user   //attaching user prop in res so that the controller which uses this route can access the user directly
+  console.log('succesfull in middleware verifyJWT')
   next()
-  
 } catch (error) {
     console.log("Error in middleware", error.message)
 }

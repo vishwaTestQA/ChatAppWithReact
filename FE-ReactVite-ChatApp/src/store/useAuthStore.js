@@ -9,6 +9,7 @@ export const useAuthStore = create((set)=>({
   isUpdatingProfile:false,
 
   isCheckingAuth: true,
+  isOnline: [],
 
   checkAuth: async() => {
     console.log("checking")
@@ -44,7 +45,7 @@ export const useAuthStore = create((set)=>({
        toast.success("Logged in successfully")
      } catch (error) {
       set({authUser: null})
-      toast.success("Login failed")
+      toast.success("Login failed", error.message)
      }finally{
       set({isLoggingIn:false})
      }

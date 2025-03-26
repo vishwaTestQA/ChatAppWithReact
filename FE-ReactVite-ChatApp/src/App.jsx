@@ -25,7 +25,7 @@ export const App = () => {
     console.log('after auth')
   }, [checkAuth])
 
-  console.log(authUser)
+  console.log("authUser", authUser)
   console.log('customTheme', customTheme)
 
   if(isCheckingAuth && !authUser) return <div>

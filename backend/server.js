@@ -29,7 +29,7 @@ app.use('/api/auth', authRouter)
 // app.use('api/auth')
 
 //messages
-app.use('api/message', messageRouter)
+app.use('/api/message', messageRouter)   //finding we need to give /**/** if we miss '/' then error 
 
 app.listen(PORT)
 

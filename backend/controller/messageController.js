@@ -5,7 +5,7 @@ import { User } from "../model/user.model.js";
 export const getUsersForSideBar = async(req, res) =>{
   //fetch all the users except ourself
   try {
-    const loggedInUser = req.user._id;
+    const loggedInUser = res.user._id;
 
     //selects all users except "loggedInUser" so that we used $ne (notequal) and we no need to send password to the client
     const filterUsers = await User.find({_id: {$ne: loggedInUser}}).select("-password")
@@ -17,9 +17,10 @@ export const getUsersForSideBar = async(req, res) =>{
 
 export const getOneToOneMessageChatList = async(req, res) =>{
   try {
-   const senderId = req.user._id;   //when verifying jwt it attach the user
-   const {id: receiverId} = req.param;
-   
+    console.log('getOneToOneMessageChatList')
+   const senderId = res.user._id;   //when verifying jwt it attach the user
+   const {id: receiverId} = req.params;   //destructured if from req.params
+  
    //we fetch all the messages with filter where the sender is us and reciver is other person or viceversa
    // find will give list - can apply some filter here $or is used to either this or that
    const messages = await Message.find({
@@ -28,11 +29,11 @@ export const getOneToOneMessageChatList = async(req, res) =>{
      {receiverId, senderId}
     ]
    })
-
+   console.log('messages', messages)
    res.status(200).json(messages)
   } catch (error) {
     //logevents to get the error from the this function
-    res.status(500).json({error:"Internal server error"})
+    res.status(500).json({error:`Internal server error ${error.message}`})
   }
 }
 
