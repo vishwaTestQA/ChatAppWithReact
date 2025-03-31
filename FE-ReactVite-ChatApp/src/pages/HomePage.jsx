@@ -55,21 +55,13 @@ console.log('users in Homepage', users)
   // },[memoizedSelectedUser, isMessagesLoading])
 
   return (
-       <section className='homeChat mt-3 bg-base-200 w-full'>
+       <section className='homeChat w-full'>
        {/* {memoizedSidebar} */}
-{/*   
-       {
-        selectedUser ?  (
-          isMessagesLoading 
-          ? <div className='animate-pulse size-4'></div>
-          : <ChatContainer/>
-         ) : ""
-       } */}
        {/* {memoizedChatContainer} */}
 
        <Sidebar className='sidebar'/>
-       {/* {selectedUser && <ChatContainer/>} */}
-       <header className='chatHeader flex items-center justify-around'>
+       {selectedUser && <ChatContainer/>}
+       {/* <header className='chatHeader flex items-center justify-around'>
       <div className='flex flex-col w-full'>
         <p>{selectedUser?.fullname}</p>
         <p>active</p>
@@ -77,7 +69,7 @@ console.log('users in Homepage', users)
       <div>
         <Cross className='size-4'></Cross>
       </div>
-    </header>
+    </header> */}
        </section>
   )
 }

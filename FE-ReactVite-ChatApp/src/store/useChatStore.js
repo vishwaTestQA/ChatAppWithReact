@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";                               
 
-export const useChatStore = create((set)=> ({
+export const useChatStore = create((set, get)=> ({
    users:[],          //at first we have to fetch users, so its null
    messages:[],
    selectedUser: null,      //while login at first we will see only empty welcome page 
@@ -26,10 +26,28 @@ export const useChatStore = create((set)=> ({
     }
    },
 
+   sendMessage: async(messageData) => {
+      const {selectedUser} = get()
+      try {
+         const resp = await axiosInstance.post(`/message/send/${selectedUser._id}`, messageData)
+         console.log('send', resp.data)
+        //  set({messages: [...messages, resp.data]})
+        set((state) => ({
+          messages: [...state.messages, resp.data]  // ✅ Uses latest state value
+        }));
+        //  set((state) => [...state.messages, resp.data])
+        //  console.log("after the call",messages)
+         //`${message.length !== 0 ? [] : message.push(resp.data)}`}
+      } catch (error) {
+        toast.error(`error sending image ${error}`)
+      }
+   },
+
    getMessages: async (receiver_id) => {
      set({isMessagesLoading:true})
      try {
        const response = await axiosInstance.get(`/message/${receiver_id}`)
+       console.log("getMesage", response.data)
        set({messages : response.data})
        toast.success('success message retrived')
       //  if(response.data.length>0){

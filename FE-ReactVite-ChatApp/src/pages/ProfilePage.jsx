@@ -3,6 +3,7 @@ import { useAuthStore } from '../store/useAuthStore'
 import { Camera, Mail, User } from 'lucide-react'
 import defaultImage from '../img/default.jpg'
 import imageCompression from 'browser-image-compression'
+import { useCompression } from '../hooks/useCompression'
 
 export const ProfilePage = () => {
   const {authUser, updateProfilePic, isUpdatingProfile} = useAuthStore()
@@ -30,28 +31,31 @@ export const ProfilePage = () => {
         const file = e.target.files[0];
     if(!file) return
 
-    const reader = new FileReader();
+    const base64Image = useCompression(file)
+    setSelectedImage(base64Image)
+    await updateProfilePic({profilePicFromUser: base64Image})
+    // const reader = new FileReader();
 
-     // Compression options
-     const options = {
-      maxSizeMB: 1, // Reduce to 1MB
-      maxWidthOrHeight: 800, // Resize
-      useWebWorker: true,
-    };
+    //  // Compression options
+    //  const options = {
+    //   maxSizeMB: 1, // Reduce to 1MB
+    //   maxWidthOrHeight: 800, // Resize
+    //   useWebWorker: true,
+    // };
 
-    try {
-      const compressedFile = await imageCompression(file, options);
-      // const base64 = await convertToBase64(compressedFile);
-      reader.readAsDataURL(compressedFile);
+    // try {
+    //   const compressedFile = await imageCompression(file, options);
+    //   // const base64 = await convertToBase64(compressedFile);
+    //   reader.readAsDataURL(compressedFile);
 
-      reader.onload = async() => {
-      const base64Image = reader.result
-      setSelectedImage(base64Image)
-      await updateProfilePic({profilePicFromUser: base64Image})
-    }
-    } catch (error) {
-      console.error("Compression failed:", error);
-    }
+    //   reader.onload = async() => {
+    //   const base64Image = reader.result
+    //   setSelectedImage(base64Image)
+    //   await updateProfilePic({profilePicFromUser: base64Image})
+    // }
+    // } catch (error) {
+    //   console.error("Compression failed:", error);
+    // }
   };
 
   const handleRemovePic = async() => {

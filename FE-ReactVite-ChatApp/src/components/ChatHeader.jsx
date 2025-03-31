@@ -2,12 +2,12 @@ import React from 'react'
 import { useChatStore } from '../store/useChatStore'
 import { Cross } from 'lucide-react';
 
-const ChatHeader = () => {
+const ChatHeader = ({className=""}) => {
   const {selectedUser} = useChatStore();
 
   return (
-    <header className='flex items-center justify-around'>
-      <div className='flex flex-col w-full'>
+    <header className={`flex items-center justify-around ${className} scroll-m-6`}>
+      <div className='flex flex-col'>
         <p>{selectedUser?.fullname}</p>
         <p>active</p>
       </div>

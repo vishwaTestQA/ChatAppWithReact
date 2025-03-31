@@ -12,6 +12,7 @@ import { Toaster } from 'react-hot-toast'
 import { useThemeStore } from './store/useThemeStore'
 import { CustomThemePage } from './pages/customThemePage'
 import { useCustomThemeStore } from './store/useCustomThemeStore'
+import { HomePageAll } from './pages/HomePageAll'
 
 export const App = () => {
   const {authUser, checkAuth, isCheckingAuth} = useAuthStore()
@@ -35,7 +36,7 @@ export const App = () => {
   return (
     // <div data-theme={theme} className='h-screen'>  //for daisyui themes
     <div className='h-screen' style={{background:customTheme.bgColor, color:customTheme.textColor}}>
-    <Navbar/>
+    {/* <Navbar/> */}
     <Routes>
 
       {/* cannot use navigate() directly, it shows error, use inside useEffect */}

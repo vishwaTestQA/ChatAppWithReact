@@ -29,7 +29,6 @@ export const getOneToOneMessageChatList = async(req, res) =>{
      {receiverId, senderId}
     ]
    })
-   console.log('messages', messages)
    res.status(200).json(messages)
   } catch (error) {
     //logevents to get the error from the this function
@@ -40,10 +39,11 @@ export const getOneToOneMessageChatList = async(req, res) =>{
 export const sendMessage = async(req, res) => {
   try {
   //1. need to get the sender id
-  const {text, image} = req?.body
-  const {id: receiverId} = req.params
-  const {id: senderId} = req.user._id
-  
+  const {text, image=""} = req?.body
+  const {id: receiverId} = req.params       //the user we want to send msg, here id denotes the name of the param which we assigned in the route
+
+  const {_id: senderId} = res.user      //our id destructured from user
+
   let imageUrl;
   if(image){   //if the message has image then need to upload it on cloudinary
     //upload base64 image to cloudinary
@@ -57,11 +57,12 @@ export const sendMessage = async(req, res) => {
     text,
     image: imageUrl
   })
-
+  
+  console.log(newMessage)
   await newMessage.save()
 
   //todo: realtime functionality: socketIO
-  res.status(200).json()
+  res.status(200).json(newMessage)
 } catch (error) {
     res.status(500).json({error: "internal server error"})
 }

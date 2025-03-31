@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { axiosInstance } from '../lib/axios'
 import { useAuthStore } from '../store/useAuthStore'
 import { Navigate, replace, useLocation, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export const LoginPage = () => {
 
@@ -45,6 +46,7 @@ export const LoginPage = () => {
 
           <button type='submit'>Login</button>
        </form>
+          <Link to='/signup'>Signup</Link>
 
     </div>
   )

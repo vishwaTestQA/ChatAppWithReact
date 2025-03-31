@@ -18,34 +18,33 @@ export const Sidebar = () => {
   if(isUsersLoading){
     return <div>Loading...</div>
   }
-  // 
+  // scroll-m-10  max-h-screen overflow-y-auto
   return (
-    <div className='sidebar overflow-y-auto max-h-screen'>
-      <aside className='p-2'>
-        <div>{
+        <aside className='sidebar flex flex-wrap overflow-y-auto overflow-x-hidden max-h-screen'>{
             users.map(user => (
-                <div key={user._id} 
-                className={`flex w-24 h-20 items-center gap-3
+                <div                         //each user list in sidebar
+                  key={user._id} 
+                  className={`flex w-full h-16 items-center gap-2
                   ${selectedUser?._id === user._id ? "bg-base-200 ring-1 ring-base-300" : ""}
                   `}
-                    onClick={()=>
+                   onClick={()=>
                       // {
                       // if(selectedUser?._id !== user._id){
-                      setSelectedUser(user)
+                   setSelectedUser(user)
                       // }
                       // }
-                    }>
-                    <div className='w-[30%]'>
-                    <img src={user?.profilePic?.url || defaultImage} className='w-full h-auto rounded-full object-cover'/>
+                }>
+                    <div className='w-8 h-8'>
+                    <img src={user?.profilePic?.url || defaultImage} className='  rounded-full object-contain w-full flex-shrink-0'/>
                     </div>
-                    <div className='flex flex-col'>
-                    <p>{user.fullname}</p>
-                    <p>active</p>
+                    {/* text-[clamp(14px,2vw,24px)] */}
+                    <div className='flex flex-col truncate'>
+                    <p className='truncate'>{user.fullname}</p>
+                    <p className='truncate'>active</p>
+                    {/* truncate */}
                     </div>
                 </div>
             ))
-          }</div>
-       </aside>
-    </div>
+          }</aside>
   )
 }

@@ -34,10 +34,10 @@ export const ChatContainer = () => {
 
 
   return (
-    <div>
-       <ChatHeader className='chatHeader'/>
-       <ChatMessage className='chatMessage'/>
+    <>           {/* if we use div then layout structure not comes */}
+       <ChatHeader className='chatHeader'/>  {/* className as props */}
+       <ChatMessage className='chatMessage'/>   
        <ChatInput className='chatInput'/>
-    </div>
+    </>
   )
 }

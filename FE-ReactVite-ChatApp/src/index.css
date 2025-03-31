@@ -14,45 +14,147 @@
   background: #f0e08796;
 }
 
-html, body{
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
+html,body{
+  /* we shouldnt add as it not letting us to scroll to full content below */
+  overflow: hidden;   
+  padding-top: 40px;
+  padding-left: 5px;
+  padding-right: 5px;
   max-height: 100vh;
+  /* height: 100vh; */
+  /* font-size: 36px; */
+
+  margin:0;
+  padding:0;
+  padding-top: 40px;
+  padding-bottom:40px;
+
+  font-size: clamp(1rem, 2vw, 1.75rem);
 }
 
 
-.homeChat{
+/* minmax(30px, 7.5rem) */
+.homeChat{       
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-auto-rows: minmax(30px, 60px) auto minmax(30px, 70px);
-  grid-template-areas: 
+  /* grid-auto-rows: minmax(30px, 60px) auto minmax(24px, 7.5rem); */
+  /* grid-auto-rows: auto; */
+  /* grid-template-areas: 
   "sd sd chd chd chd chd"
   "sd sd cht cht cht cht"
-  "sd sd cinp cinp cinp cinp";
-  /* min-height: 100vh; */
-  /* position: absolute; */
+  "sd sd cinp cinp cinp cinp"; */
+
+  /* grid-template-areas: 
+  "sd chd chd chd chd"
+  "sd cht cht cht cht"
+  "sd cinp cinp cinp cinp"; */
+
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-auto-rows: minmax(30px, 60px) auto minmax(24px, 7.5rem); */
+  /* grid-auto-rows: auto; */
+  /* grid-template-areas: 
+  "sd sd chd chd chd chd"
+  "sd sd cht cht cht cht"
+  "sd sd cinp cinp cinp cinp"; */
+  grid-template-areas: 
+  "chd chd chd chd"
+  "cht cht cht cht"
+  "cinp cinp cinp cinp";
 }
 
 .sidebar{
   grid-area: sd;
-  /* overflow-y: auto; */
+  /* max-width: 150px; */
+  padding: 10px; 
+  /* font-size: 36px; */
 }
 
 .chatHeader{
   grid-area: chd;
   position: sticky;
-  top:0;
-  background-color: aqua;
+  max-height: 30px;
+  /* font-size: clamp(24px, 2vw, 36px); */
 }
 
 .chatMessage{
   grid-area: cht;
-  /* overflow-y: auto; */
+  padding: 10px; 
 }
 
 .chatInput{
   grid-area: cinp;
   position: sticky;
-  bottom: 0;
+  /* width:100%; */
+  bottom: 1px;
+  right:0;
+  background-color: green;
+  min-height: 30px;
+  max-height: 60px;
+  /* min-height: 30px; */
+  padding: 10px; 
+}
+
+/* .grid-areas-chat {
+  display: grid;
+  grid-template-rows: minmax(30px, 60px) auto minmax(30px, 60px);
+  grid-template-areas: 
+    "chd"
+    "cht"
+    "cinp";
+  height: 100%;
+  width: 100%;
+} */
+
+.heart{
+  animation: beat 2s infinite;
+}
+
+@keyframes beat {
+  0%{
+    transform: scale(0.8);
+  }
+  100%{
+    transform: scale(1.2);
+  }
+}
+
+.heart:hover{
+    animation: beat1 2 infinite
+}
+
+@keyframes beat1 {
+  0%{
+    transform: scale(1.5);
+  }
+  100%{
+    transform: scale(3);
+  }
+}
+
+/* @media screen and (min-width: 1250px){
+   body{
+    background-color: blue;
+   }
+   .sidebar{
+    font-size: 40px;
+    background-color: green;
+   }
+} */
+
+@media screen and (min-width: 768px){
+  body{
+   background-color: blue;
+   max-height: 100vh;
+  }
+  .sidebar{
+   /* font-size: 20px; */
+   background-color: green;
+  }
+
+  .homeChat{
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: 
+    "sd chd chd chd chd"
+    "sd cht cht cht cht"
+    "sd cinp cinp cinp cinp";
+  }
 }
