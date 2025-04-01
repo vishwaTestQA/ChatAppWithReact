@@ -13,6 +13,7 @@ import { useThemeStore } from './store/useThemeStore'
 import { CustomThemePage } from './pages/customThemePage'
 import { useCustomThemeStore } from './store/useCustomThemeStore'
 import { HomePageAll } from './pages/HomePageAll'
+import { HomePageNew } from './components/Sub/HomePageNew'
 
 export const App = () => {
   const {authUser, checkAuth, isCheckingAuth} = useAuthStore()
@@ -41,7 +42,7 @@ export const App = () => {
 
       {/* cannot use navigate() directly, it shows error, use inside useEffect */}
       {/* <Route path='/' element={authUser ? <HomePage/> : navigate('/login', {replace: true})}/> */}
-      <Route path='/' element={authUser ? <HomePage/> : <Navigate to="/login" state={{from:'/'}}/>}/>
+      <Route path='/' element={authUser ? <HomePageNew/> : <Navigate to="/login" state={{from:'/'}}/>}/>
       <Route path='/signup' element={!authUser ? <SignupPage/> : <Navigate to="/" state={{from:'/'}}/>}/>
       <Route path='/login' element={!authUser ? <LoginPage/> : <Navigate to='/' replace/>}/>
       <Route path='/settings' element={<SettingsPage/>}/>

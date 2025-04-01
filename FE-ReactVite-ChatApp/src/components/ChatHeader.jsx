@@ -6,7 +6,7 @@ const ChatHeader = ({className=""}) => {
   const {selectedUser} = useChatStore();
 
   return (
-    <header className={`flex items-center justify-around ${className} scroll-m-6`}>
+    <header className={`flex items-center justify-around ${className}`}>
       <div className='flex flex-col'>
         <p>{selectedUser?.fullname}</p>
         <p>active</p>

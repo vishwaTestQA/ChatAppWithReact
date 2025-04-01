@@ -10,151 +10,86 @@
 /* corporate:['#6f6ff3','#70878f','#008073','#111'] */
 /* retro:['plum','#77ece0a6','#915f02','#370e0e']*/
 
-.theme{
-  background: #f0e08796;
+.homeChat{
+  display: flex;
+  flex-flow: column;  
 }
 
-html,body{
-  /* we shouldnt add as it not letting us to scroll to full content below */
-  overflow: hidden;   
-  padding-top: 40px;
-  padding-left: 5px;
-  padding-right: 5px;
-  max-height: 100vh;
-  /* height: 100vh; */
-  /* font-size: 36px; */
-
-  margin:0;
-  padding:0;
-  padding-top: 40px;
-  padding-bottom:40px;
-
-  font-size: clamp(1rem, 2vw, 1.75rem);
+.header{
+   height: 30px;
+   background-color: blueviolet;
+   position: fixed;
+   width: 100%;
+   top:0;
 }
 
-
-/* minmax(30px, 7.5rem) */
-.homeChat{       
-  display: grid;
-  /* grid-auto-rows: minmax(30px, 60px) auto minmax(24px, 7.5rem); */
-  /* grid-auto-rows: auto; */
-  /* grid-template-areas: 
-  "sd sd chd chd chd chd"
-  "sd sd cht cht cht cht"
-  "sd sd cinp cinp cinp cinp"; */
-
-  /* grid-template-areas: 
-  "sd chd chd chd chd"
-  "sd cht cht cht cht"
-  "sd cinp cinp cinp cinp"; */
-
-  grid-template-columns: repeat(4, 1fr);
-  /* grid-auto-rows: minmax(30px, 60px) auto minmax(24px, 7.5rem); */
-  /* grid-auto-rows: auto; */
-  /* grid-template-areas: 
-  "sd sd chd chd chd chd"
-  "sd sd cht cht cht cht"
-  "sd sd cinp cinp cinp cinp"; */
-  grid-template-areas: 
-  "chd chd chd chd"
-  "cht cht cht cht"
-  "cinp cinp cinp cinp";
+.footer{
+  height: 30px;
+  background-color: blueviolet;
+  position: fixed;
+  width: 100%;
+  bottom:0;
 }
 
 .sidebar{
-  grid-area: sd;
-  /* max-width: 150px; */
-  padding: 10px; 
-  /* font-size: 36px; */
+  padding-top:30px;
+}
+
+img{
+  display: block;
+}
+
+.sidebar{
+  /* display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 30px);
+  width:100%;
+  overflow-y: auto;
+  gap:2 */
 }
 
 .chatHeader{
-  grid-area: chd;
-  position: sticky;
-  max-height: 30px;
-  /* font-size: clamp(24px, 2vw, 36px); */
+   position: fixed;
+   top:0;
+   width: 100%;
 }
 
 .chatMessage{
-  grid-area: cht;
-  padding: 10px; 
+  width: 100%;
 }
 
 .chatInput{
-  grid-area: cinp;
-  position: sticky;
-  /* width:100%; */
-  bottom: 1px;
-  right:0;
-  background-color: green;
-  min-height: 30px;
-  max-height: 60px;
-  /* min-height: 30px; */
-  padding: 10px; 
-}
-
-/* .grid-areas-chat {
-  display: grid;
-  grid-template-rows: minmax(30px, 60px) auto minmax(30px, 60px);
-  grid-template-areas: 
-    "chd"
-    "cht"
-    "cinp";
-  height: 100%;
+  position: fixed;
   width: 100%;
-} */
-
-.heart{
-  animation: beat 2s infinite;
+  bottom: 0;
 }
 
-@keyframes beat {
-  0%{
-    transform: scale(0.8);
-  }
-  100%{
-    transform: scale(1.2);
-  }
-}
 
-.heart:hover{
-    animation: beat1 2 infinite
-}
-
-@keyframes beat1 {
-  0%{
-    transform: scale(1.5);
-  }
-  100%{
-    transform: scale(3);
-  }
-}
-
-/* @media screen and (min-width: 1250px){
-   body{
-    background-color: blue;
-   }
-   .sidebar{
-    font-size: 40px;
-    background-color: green;
-   }
-} */
-
-@media screen and (min-width: 768px){
-  body{
-   background-color: blue;
-   max-height: 100vh;
-  }
-  .sidebar{
-   /* font-size: 20px; */
-   background-color: green;
-  }
-
+@media screen and (min-width:768) {
   .homeChat{
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-areas: 
-    "sd chd chd chd chd"
-    "sd cht cht cht cht"
-    "sd cinp cinp cinp cinp";
+    display:grid;
+    grid-template-columns:50px 300px 1fr;
+    grid-template-areas: "ft sd cc";
   }
+
+  .sidebar{
+    grid-area: sd;
+    /* display: inline-block; */
+  }
+
+  .footer{
+    grid-area: ft;
+    top:30px;
+    bottom: 0;
+    left:0;
+    position: sticky;
+  }
+
+
+  .chatContainer{
+    grid-area: cc;
+  }
+
 }
+
+
