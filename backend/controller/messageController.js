@@ -26,9 +26,16 @@ export const getOneToOneMessageChatList = async(req, res) =>{
    const messages = await Message.find({
     $or:[
      {senderId, receiverId},
-     {receiverId, senderId}
+     {senderId: receiverId, receiverId: senderId}
+    // {receiverId, senderId}
     ]
    })
+
+//    { senderId, receiverId } → shorthand for { senderId: senderId, receiverId: receiverId }
+
+// { senderId: receiverId, receiverId: senderId } → reversed pair
+
+   console.log("messages", messages)
    res.status(200).json(messages)
   } catch (error) {
     //logevents to get the error from the this function

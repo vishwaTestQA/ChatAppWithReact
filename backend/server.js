@@ -33,3 +33,4 @@ app.use('/api/message', messageRouter)   //finding we need to give /**/** if we 
 
 app.listen(PORT)
 
+//socketIo

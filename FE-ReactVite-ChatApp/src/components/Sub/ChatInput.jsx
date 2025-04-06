@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useCompression } from '../../hooks/useCompression'
 import { useChatStore } from '../../store/useChatStore'
+import { Image, Send } from 'lucide-react'
 
-export const ChatInput = () => {
+export const ChatInput = ({className=''}) => {
    const [inpValue, setInpValue] = useState('')
     const [image, setImage] = useState(null)
+
     const [imageForCompression, setImageForCompression] = useState(false)
     const {sendMessage} = useChatStore()
   
@@ -22,8 +24,6 @@ export const ChatInput = () => {
      const file = e.target.files[0];
      setImageForCompression(true)
      compressImage(file)
-     console.log(compressedImage)
-    //  setImage(compressedImage)
     }
   
     const handleClickImage = (e) => {
@@ -47,9 +47,11 @@ export const ChatInput = () => {
         textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
       }
     },[inpValue])
+
   return (
+    // min-h-[1.5rem] max-h-[7.5rem]
     <div
-    className={`chatInput flex gap-2 justify-between min-h-[1.5rem] max-h-[7.5rem]relative fixed bottom-0 w-full`}
+    className={`${className} flex gap-2 justify-between items-end overflow-hidden relative p-3`}
   >
     {imageForCompression && loading && <div>Loading...</div>}
 
@@ -68,10 +70,11 @@ export const ChatInput = () => {
     )}
     <textarea
       type="text"
-      rows="1"
+      ref={textareaRef}
+      rows="2"
       onChange={(e) => setInpValue(e.target.value)}
       value={inpValue}
-      className="w-[80%] min-h-[1.5rem] max-h-[7.5rem] overflow-auto resize-none"
+      className="w-[80%] min-h-[1.5rem] max-h-[7.5rem] overflow-auto resize-none p-2"
     />
     <input
       type="file"
@@ -82,11 +85,11 @@ export const ChatInput = () => {
     />
 
     <button onClick={handleClickImage}>
-      <Image></Image>
+      <Image ></Image>
     </button>
 
     <button onClick={handleSendMessage}>
-      <Send className="size-4"></Send>
+      <Send className="size-6"></Send>
     </button>
   </div>
   )

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Cross, Image, Send } from "lucide-react";
-import { useChatStore } from "../../store/useChatStore";
+import { useChatStore } from "../store/useChatStore";
 import defaultImage from "../img/default.jpg";
 
-import { useCompression } from "../../hooks/useCompression";
-import { useAuthStore } from "../../store/useAuthStore";
+import { useCompression } from "../hooks/useCompression";
+import { useAuthStore } from "../store/useAuthStore";
 
 export const HomePageNew = () => {
   const { authUser } = useAuthStore();

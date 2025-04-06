@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useChatStore } from "../../store/useChatStore";
 
-export const ChatMessage = () => {
+export const ChatMessage = ({className=''}) => {
    const {messages, selectedUser} = useChatStore();
     const msgRef = useRef(null)
   
@@ -12,12 +12,12 @@ export const ChatMessage = () => {
     },[messages])
   
     if(messages.length === 0){
-      return <div>No chats to display</div>
+      return <div className={`${className}`}>No chats to display</div>
     }
 
   return (
     <main
-      className={`chatMessage max-h-[calc(100vh-80px)] w-[100%] overflow-y-auto  p-t-6 block`}
+      className={`${className} pt-8 overflow-y-auto p-t-6 block`}
       >
       <ul className="flex flex-col">
         {messages.map((msg, indx) => (

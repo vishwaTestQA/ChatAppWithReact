@@ -1,12 +1,16 @@
 import React from 'react'
 import { useChatStore } from '../../store/useChatStore';
 
-export const ChatHeader = () => {
-    const {selectedUser} = useChatStore();
+export const ChatHeader = ({className=''}) => {
+    const {selectedUser, setSelectedUser} = useChatStore();
     
+    const handleCloseUser = () => {
+      setSelectedUser(null);
+    };
+
   return (
       <header
-        className={`chatHeader flex items-center justify-between w-full fixed top-0 md:sticky md:top-6 md:flex-1`}
+        className={`chatHeader flex items-center justify-between p-3 ${className}`}
       >
         <div className="flex flex-col">
           <p>{selectedUser?.fullname}</p>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore'
 import { Camera, Mail, User } from 'lucide-react'
 import defaultImage from '../img/default.jpg'
@@ -26,14 +26,19 @@ export const ProfilePage = () => {
     }
 
   }
+
+    const {compressedImage, loading, error, compressImage} = useCompression()
+
+    const [imageForCompression, setImageForCompression] = useState(false);
  
   const updateCompressedImage = async (e) =>{
-        const file = e.target.files[0];
+    const file = e.target.files[0];
     if(!file) return
-
-    const base64Image = useCompression(file)
-    setSelectedImage(base64Image)
-    await updateProfilePic({profilePicFromUser: base64Image})
+    compressImage(file)
+    // const base64Image = await compressImage(file)
+    // console.log(base64Image)
+    // setSelectedImage(base64Image)
+    // await updateProfilePic({profilePicFromUser: base64Image})
     // const reader = new FileReader();
 
     //  // Compression options
@@ -58,9 +63,16 @@ export const ProfilePage = () => {
     // }
   };
 
+   useEffect(()=>{
+      if(compressedImage){
+        setSelectedImage(compressedImage)
+        updateProfilePic({profilePicFromUser: compressedImage})
+      }
+    },[compressedImage])
+
   const handleRemovePic = async() => {
     setSelectedImage(null)
-    await updateProfilePic({profilePic: 'remove'})
+    await updateProfilePic({profilePicFromUser: 'remove'})
   }
 
   return (
@@ -71,7 +83,7 @@ export const ProfilePage = () => {
       <input type="file" id="image" className='hidden'/>
       </div> */}
 
-      <div className='w-40 h-40 rounded-full bg-white relative'>
+      <div className='w-40 h-40 rounded-full bg-white relative'> 
        <img src={selectedImage || authUser.profilePic.url || defaultImage} alt='tom' className='w-full h-full object-cover rounded-full' onError={e=> (e.target.src = "./tom3.jpg")}/>
        <label 
        htmlFor="image" 
@@ -83,8 +95,18 @@ export const ProfilePage = () => {
       className="hidden" 
       onChange={updateCompressedImage}/>
       </label>
+      <button 
+      className='absolute top-4 left-0 w-6 h-6 bg-black text-center'
+      onClick={handleRemovePic}>
+        <span>X</span>
+      </button>
       </div>
-      {isUpdatingProfile? <div className='animate-spin size-4'></div> : <p>click the camera icon to update your profile pic</p> }                                                                                                             
+
+      {
+      isUpdatingProfile 
+        ? <div className='animate-spin size-4'></div> 
+        : <p>click the camera icon to update your profile pic</p> 
+      }                                                                                                             
       <div>
         <div>
         <User className='inline-block'/>
