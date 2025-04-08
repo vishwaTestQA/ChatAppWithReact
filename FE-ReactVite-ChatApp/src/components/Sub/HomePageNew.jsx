@@ -25,7 +25,6 @@ export const HomePageNew = () => {
     sendMessage,
   } = useChatStore();
 
-
   useEffect(() => {
     if (users?.length === 0) {
       getUsers();

@@ -5,6 +5,8 @@ import messageRouter from "./routes/message.route.js"
 import connectDB from "./config/dbConn.js"
 import cors from 'cors'
 import cookieParser from "cookie-parser"
+import { Server } from "socket.io"
+import { initServer } from "./config/socket.js"
 
 const app = express()
 dotenv.config()
@@ -31,6 +33,9 @@ app.use('/api/auth', authRouter)
 //messages
 app.use('/api/message', messageRouter)   //finding we need to give /**/** if we miss '/' then error 
 
-app.listen(PORT)
+const expressServer = app.listen(PORT)
 
 //socketIo
+initServer(expressServer)
+
+

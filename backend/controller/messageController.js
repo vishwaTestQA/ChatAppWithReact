@@ -1,4 +1,5 @@
 import cloudinary from "../config/cloudinary.js";
+import { getIO, socketsForUsers } from "../config/socket.js";
 import Message from "../model/message.model.js";
 import { User } from "../model/user.model.js";
 
@@ -35,7 +36,7 @@ export const getOneToOneMessageChatList = async(req, res) =>{
 
 // { senderId: receiverId, receiverId: senderId } → reversed pair
 
-   console.log("messages", messages)
+  //  console.log("messages", messages)
    res.status(200).json(messages)
   } catch (error) {
     //logevents to get the error from the this function
@@ -64,12 +65,15 @@ export const sendMessage = async(req, res) => {
     text,
     image: imageUrl
   })
-  
-  console.log(newMessage)
+ 
   await newMessage.save()
 
   //todo: realtime functionality: socketIO
   res.status(200).json(newMessage)
+  
+  console.log(socketsForUsers)
+  getIO().to(socketsForUsers.get(receiverId)).emit('message', newMessage)
+
 } catch (error) {
     res.status(500).json({error: "internal server error"})
 }

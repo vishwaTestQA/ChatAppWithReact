@@ -30,7 +30,7 @@ export const LoginPage = () => {
   const submitLogin = (e) => {
     e.preventDefault()
     login(formData)
-    navigate(from)
+    // navigate(from)
   }
 
   return (

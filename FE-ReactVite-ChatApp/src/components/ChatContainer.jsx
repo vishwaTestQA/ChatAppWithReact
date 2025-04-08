@@ -5,9 +5,13 @@ import ChatHeader from './ChatHeader';
 import { ChatMessage } from './ChatMessage';
 import { ChatInput } from './ChatInput';
 import {shallow} from 'zustand/shallow'
+import { useSocketStore } from '../store/useSocketStore';
+import { socket } from '../lib/socket';
 
 export const ChatContainer = () => {
   const {selectedUser, getMessages, isMessagesLoading} = useChatStore()
+
+  const {connectSocket} = useSocketStore()
 
   // const { selectedUser, getMessages } = useChatStore(   //not required not works well
   //   (state) => ({
@@ -18,10 +22,12 @@ export const ChatContainer = () => {
   // )
 
   useEffect(() => {
+
     // if(selectedUser?._id){
       getMessages(selectedUser._id);         //backend will automatically get our userId in
                                               //in the resp (user set when verifyJWT) so messages to that chat is displyed
     // }
+    // console.log("getingMsg",getMessage());
   }, [selectedUser._id, getMessages]);    //if the method(getMessage) is memoized then no
                                            //   need to give in dependency array
   if(isMessagesLoading){

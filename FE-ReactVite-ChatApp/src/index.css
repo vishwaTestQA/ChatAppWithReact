@@ -23,7 +23,9 @@ body{
    z-index: 999;
    width: 100%;
    top:0;
-
+   padding-top: 10px;
+   padding-bottom: 10px;
+   
    display: flex;
    justify-content: space-between;
 }
@@ -131,10 +133,12 @@ img{
 
   .chatContainer{
     grid-area: chat;
+    max-height: 100vh;
+    overflow: hidden;
   }
 
   .chatHeader{
-    top:40px;
+    top:45px;
     position: sticky;
     width:100%; 
   }
@@ -149,6 +153,16 @@ img{
     height: 100vh;
     flex-direction: column;
     justify-content: space-around;
+  }
+
+
+  .chatMessage{
+    flex-grow: 1;
+    width: 100%;
+    /* min-height: calc(100vh - 240px); */
+    /* max-height: calc(100vh - 120px); */
+    height: calc(100vh - 100px);
+    overflow-y: auto;
   }
 
 }

@@ -14,6 +14,7 @@ import { CustomThemePage } from './pages/customThemePage'
 import { useCustomThemeStore } from './store/useCustomThemeStore'
 import { HomePageAll } from './pages/HomePageAll'
 import { HomePageNew } from './components/Sub/HomePageNew'
+import { socket } from './lib/socket'
 
 export const App = () => {
   const {authUser, checkAuth, isCheckingAuth} = useAuthStore()
@@ -30,6 +31,10 @@ export const App = () => {
   console.log("authUser", authUser)
   console.log('customTheme', customTheme)
 
+  socket.on('consoleMsg', data => {
+    console.log("connected socket", data)
+  })
+  
   if(isCheckingAuth && !authUser) return <div>
     <Loader className='size-10 animate-spin'/>
     </div>

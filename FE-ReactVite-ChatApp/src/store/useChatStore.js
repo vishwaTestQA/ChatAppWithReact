@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
-import toast from "react-hot-toast";                               
+import toast from "react-hot-toast";                        
+import { socket } from "../lib/socket";
 
 export const useChatStore = create((set, get)=> ({
    users:[],          //at first we have to fetch users, so its null
@@ -30,7 +31,6 @@ export const useChatStore = create((set, get)=> ({
       const {selectedUser} = get()
       try {
          const resp = await axiosInstance.post(`/message/send/${selectedUser._id}`, messageData)
-         console.log('send', resp.data)
         //  set({messages: [...messages, resp.data]})
         set((state) => ({
           messages: [...state.messages, resp.data]  // ✅ Uses latest state value
@@ -38,6 +38,13 @@ export const useChatStore = create((set, get)=> ({
         //  set((state) => [...state.messages, resp.data])
         //  console.log("after the call",messages)
          //`${message.length !== 0 ? [] : message.push(resp.data)}`}
+             //socketIO
+      socket.emit('message', {text: messageData, receiverId: selectedUser._id})
+
+      socket.on('message', data =>{
+        set((state) => ({
+          messages: [...state.messages, data]}))
+      })
       } catch (error) {
         toast.error(`error sending image ${error}`)
       }
@@ -63,7 +70,7 @@ export const useChatStore = create((set, get)=> ({
      }finally{
       set({isMessagesLoading:false})
      }
-   }
+   },
   
   // setSelectedUser: (selectedUser) => {
   //   set((state)=>({...state, selectedUser}))
@@ -100,4 +107,5 @@ export const useChatStore = create((set, get)=> ({
   //     set((state)=>({...state, isMessagesLoading:false}))
   //    }
   //  }
+  
 }))
