@@ -32,16 +32,17 @@ export const useChatStore = create((set, get)=> ({
       try {
          const resp = await axiosInstance.post(`/message/send/${selectedUser._id}`, messageData)
         //  set({messages: [...messages, resp.data]})
-        set((state) => ({
-          messages: [...state.messages, resp.data]  // ✅ Uses latest state value
-        }));
+        // set((state) => ({
+        //   messages: [...state.messages, resp.data]  // ✅ Uses latest state value
+        // }));
         //  set((state) => [...state.messages, resp.data])
         //  console.log("after the call",messages)
          //`${message.length !== 0 ? [] : message.push(resp.data)}`}
              //socketIO
       socket.emit('message', {text: messageData, receiverId: selectedUser._id})
 
-      socket.on('message', data =>{
+      socket.on('message', data => {
+        console.log('dtttt', data)
         set((state) => ({
           messages: [...state.messages, data]}))
       })

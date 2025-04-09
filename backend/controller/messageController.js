@@ -77,4 +77,4 @@ export const sendMessage = async(req, res) => {
 } catch (error) {
     res.status(500).json({error: "internal server error"})
 }
-}
+}   

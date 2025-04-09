@@ -21,10 +21,10 @@ export const useAuthStore = create((set, get)=>({
       console.log(res.data)
       set({authUser: res.data})
 
-      socket.emit('login', get().authUser?._id)
-       socket.on('message', data => {
-         console.log('loginAuthSocket', data)
-      })
+      // socket.emit('login', get().authUser?._id)
+      //  socket.on('message', data => {
+      //    console.log('loginAuthSocket', data)
+      // })
 
     } catch (error) {
       console.log('checkAuth error', error.message)
