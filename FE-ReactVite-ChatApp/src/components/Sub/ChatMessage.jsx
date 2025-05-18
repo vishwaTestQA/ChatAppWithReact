@@ -1,11 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import { useChatStore } from "../../store/useChatStore";
 import { useAuthStore } from "../../store/useAuthStore";
+import useSocketListeners from "../../hooks/useSocketListeners";
 
 export const ChatMessage = ({className=''}) => {
    const {messages, selectedUser} = useChatStore();
    const {authUser} = useAuthStore();
     const msgRef = useRef(null)
+
+    useSocketListeners()
   
     useEffect(()=>{
       if(msgRef.current){

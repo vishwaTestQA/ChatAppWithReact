@@ -17,11 +17,12 @@ export const useAuthStore = create((set, get)=>({
   checkAuth: async() => {
     console.log("checking")
     try {
+      // socket.emit('check', get().authUser?._id)
+
       const res = await axiosInstance.get('/auth/check')
       console.log(res.data)
       set({authUser: res.data})
 
-      // socket.emit('login', get().authUser?._id)
       //  socket.on('message', data => {
       //    console.log('loginAuthSocket', data)
       // })
@@ -55,10 +56,13 @@ export const useAuthStore = create((set, get)=>({
 
        //socket , when loggede in it listen for login event and will not emit anything
        console.log('after sucefull login', get().authUser)
+
        socket.emit('login', get().authUser?._id)
-       socket.on('message', data => {
-         console.log('loginAuthSocket', data)
-       })
+
+      //  socket.on('message', data => {
+      //    console.log('loginAuthSocket', data)
+      //  })
+
      } catch (error) {
       set({authUser: null})
       toast.success("Login failed", error.message)
@@ -72,6 +76,7 @@ export const useAuthStore = create((set, get)=>({
       const resp = await axiosInstance.post('/auth/logout')
       set({authUser: null})
       toast.success("successfully logged out")
+      
      } catch (error) {
       // set({authUser: null})
       toast.error('loggedOut unsuccess')

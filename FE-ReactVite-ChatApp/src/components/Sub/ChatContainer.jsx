@@ -11,14 +11,13 @@ export const ChatContainer = () => {
   useEffect(() => {
     // if(selectedUser?._id){
       // if(!socket.connected){
-        console.log("==================")
-        socket.connect();
-        socket.on('connect', () => {
-          console.log("connected","connected")
-        })
-        socket.on('message', data => {
-          console.log('data1234567', data)
-        })
+        // socket.connect();
+        // socket.on('connect', () => {
+        //   console.log("connected","connected")
+        // })
+        // socket.on('message', data => {
+        //   console.log('data1234567', data)
+        // })
       //  }
       getMessages(selectedUser?._id);         //backend will automatically get our userId in
                                               //in the resp (user set when verifyJWT) so messages to that chat is displyed

@@ -7,6 +7,7 @@ import cors from 'cors'
 import cookieParser from "cookie-parser"
 import { Server } from "socket.io"
 import { initServer } from "./config/socket.js"
+import healthRoute from "./routes/healthCheck.route.js"
 
 const app = express()
 dotenv.config()
@@ -32,6 +33,8 @@ app.use('/api/auth', authRouter)
 
 //messages
 app.use('/api/message', messageRouter)   //finding we need to give /**/** if we miss '/' then error 
+
+app.use('/api/ping', healthRoute)
 
 const expressServer = app.listen(PORT)
 

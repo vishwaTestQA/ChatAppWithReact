@@ -7,7 +7,7 @@ import { useCompression } from "../hooks/useCompression";
 import { useAuthStore } from "../store/useAuthStore";
 
 export const HomePageNew = () => {
-  const { authUser } = useAuthStore();
+  // const { authUser } = useAuthStore();
   const {
     users,
     getUsers,
@@ -27,13 +27,14 @@ export const HomePageNew = () => {
 
   const fileRef = useRef(null);
 
-  console.log("auth", authUser);
+  // console.log("auth", authUser);
 
   useEffect(() => {
     if (users?.length === 0) {
       getUsers();
     }
   }, [getUsers]);
+
   console.log("users", users);
 
   useEffect(() => {

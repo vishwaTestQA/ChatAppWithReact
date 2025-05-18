@@ -21,7 +21,7 @@ export const Navbar = () => {
         <Link to='/profilePage'>profilePage</Link>
        </div>
        <div>
-        <Link to='/settings'> <Settings className='size-4'/></Link>
+        <Link to='/settings'><Settings className='size-4'/></Link>
        </div>
        <div>
        <Link to='/customSettings'> custom <Settings className='size-6 inline-block'/></Link>

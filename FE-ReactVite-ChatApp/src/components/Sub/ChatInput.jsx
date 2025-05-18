@@ -18,6 +18,8 @@ export const ChatInput = ({className=''}) => {
     const handleSendMessage = (e) => {
       e.preventDefault();
       sendMessage({text:inpValue, image})
+      setInpValue('')
+      setImage('')
     }
   
     const handleImageChange = (e) =>{

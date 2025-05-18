@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useChatStore } from '../store/useChatStore'
 import { shallow } from 'zustand/shallow';
+import useSocketListeners from '../hooks/useSocketListeners';
 
 export const ChatMessage = ({className=''}) => {
 

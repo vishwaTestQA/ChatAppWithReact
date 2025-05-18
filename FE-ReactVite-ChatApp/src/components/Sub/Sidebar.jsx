@@ -11,7 +11,7 @@ export const Sidebar = () => {
       return <div>Loading...</div>;
     }
 
-  console.log(users)
+  // console.log(users)
   return (
     <aside
     // className={`sidebar flex flex-wrap overflow-y-auto max-h-[calc(100vh-30px)] w-full gap-2 ${
@@ -19,12 +19,12 @@ export const Sidebar = () => {
     // }`}
     //  className='sidebar'
   >
-      {users.map((user) => (
+      {users?.map((user) => (
         <div
           key={user._id}
           className={`flex w-full h-20 items-center gap-3
               ${
-                selectedUser?._id === user._id
+                selectedUser?._id.toString() === user._id.toString()
                   ? "bg-base-200 ring-1 ring-base-300"
                   : ""
               }

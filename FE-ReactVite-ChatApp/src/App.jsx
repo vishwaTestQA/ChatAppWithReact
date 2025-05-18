@@ -14,14 +14,31 @@ import { CustomThemePage } from './pages/customThemePage'
 import { useCustomThemeStore } from './store/useCustomThemeStore'
 import { HomePageAll } from './pages/HomePageAll'
 import { HomePageNew } from './components/Sub/HomePageNew'
-import { socket } from './lib/socket'
+import { id, socket } from './lib/socket'
+import { useNetworkStatus } from './hooks/useNetworkStatus'
+import { CheckNetworkStatus } from './components/Sub/CheckNetworkStatus'
+import { useOnlineCheck } from './hooks/useOnlineCheck'
+import { useOnlineCheckFromBackend } from './hooks/useOnlineCheckFromBackend'
 
 export const App = () => {
+
+  // useNetworkStatus();
+  // CheckNetworkStatus();
+  // const isOnline = useOnlineCheck()
+  const isOnline = useOnlineCheckFromBackend()
+  console.log('online or offline', isOnline)
   const {authUser, checkAuth, isCheckingAuth} = useAuthStore()
   const {theme} = useThemeStore()
   const {customTheme} = useCustomThemeStore()
   const navigate = useNavigate();
- 
+
+  console.log("always", id);
+
+  useEffect(()=>{
+    console.log("=====isOnline===?", isOnline)
+  },[isOnline])
+  // console.log("=====isOnline===?", isOnline)
+
   useEffect(()=>{
     console.log('before auth')
     checkAuth();
@@ -34,11 +51,11 @@ export const App = () => {
   socket.on('consoleMsg', data => {
     console.log("connected socket", data)
   })
-  
+
   if(isCheckingAuth && !authUser) return <div>
     <Loader className='size-10 animate-spin'/>
     </div>
-
+  
   return (
     // <div data-theme={theme} className='h-screen'>  //for daisyui themes
     <div className='h-screen' style={{background:customTheme.bgColor, color:customTheme.textColor}}>

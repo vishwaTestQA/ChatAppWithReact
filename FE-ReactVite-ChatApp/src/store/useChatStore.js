@@ -10,6 +10,10 @@ export const useChatStore = create((set, get)=> ({
    isUsersLoading: false,   //when fetching users to show loading
    isMessagesLoading: false,
 
+   reset: () => {
+     set({users: null, messages:[], selectedUser:null})
+   },
+
    setSelectedUser: (selectedUser) => {
     set({selectedUser})
    },
@@ -32,24 +36,38 @@ export const useChatStore = create((set, get)=> ({
       try {
          const resp = await axiosInstance.post(`/message/send/${selectedUser._id}`, messageData)
         //  set({messages: [...messages, resp.data]})
-        // set((state) => ({
-        //   messages: [...state.messages, resp.data]  // ✅ Uses latest state value
-        // }));
+
+        // Add our own message to local state immediately (optional, for instant feedback)
+        set((state) => ({
+          messages: [...state.messages, resp.data]  // ✅ Uses latest state value
+        }));
+
         //  set((state) => [...state.messages, resp.data])
+
         //  console.log("after the call",messages)
          //`${message.length !== 0 ? [] : message.push(resp.data)}`}
              //socketIO
-      socket.emit('message', {text: messageData, receiverId: selectedUser._id})
 
-      socket.on('message', data => {
-        console.log('dtttt', data)
-        set((state) => ({
-          messages: [...state.messages, data]}))
-      })
+      // socket.emit('message', {text: messageData, receiverId: selectedUser._id})
+
+      //shouldnot use this, because everytime when we send a message a new socket event listener is registered,
+      //This cause duplicate listener everytime we send message it keeps stacking up and can result in repeated logs, duplicated message in ui, ,e,ory leaks
+      //so better move it global state
+      // socket.on('message', data => {
+      //   console.log('dtttt', data)
+      //   set((state) => ({
+      //     messages: [...state.messages, data]}))
+      // })
       } catch (error) {
         toast.error(`error sending image ${error}`)
       }
    },
+
+   appendMessages: (msg) => {
+    set(state => ({
+      messages: [...state.messages, msg]
+    }))
+   }, 
 
    getMessages: async (receiver_id) => {
      set({isMessagesLoading:true})

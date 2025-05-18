@@ -2,6 +2,7 @@ import { Check, Flower, Heart, HeartCrackIcon, HeartIcon, HeartPulse, Image, Sen
 import React, { useEffect, useRef, useState } from 'react'
 import { useChatStore } from '../store/useChatStore'
 import { useCompression } from '../hooks/useCompression'
+// import { emitMessage } from '../lib/socket'
 
 export const ChatInput = ({className=""}) => {
   const [inpValue, setInpValue] = useState('')
@@ -17,6 +18,8 @@ export const ChatInput = ({className=""}) => {
   const handleSendMessage = (e) => {
     e.preventDefault();
     sendMessage({text:inpValue, image})
+    // setInpValue('')
+    // emitMessage(inpValue, selectedUser._id)
   }
 
   const handleImageChange = (e) =>{

@@ -7,11 +7,11 @@ import { ChatInput } from './ChatInput';
 import {shallow} from 'zustand/shallow'
 import { useSocketStore } from '../store/useSocketStore';
 import { socket } from '../lib/socket';
+import useSocketListeners from '../hooks/useSocketListeners';
 
 export const ChatContainer = () => {
   const {selectedUser, getMessages, isMessagesLoading} = useChatStore()
 
-  const {connectSocket} = useSocketStore()
 
   // const { selectedUser, getMessages } = useChatStore(   //not required not works well
   //   (state) => ({
@@ -22,7 +22,6 @@ export const ChatContainer = () => {
   // )
 
   useEffect(() => {
-
     // if(selectedUser?._id){
       getMessages(selectedUser._id);         //backend will automatically get our userId in
                                               //in the resp (user set when verifyJWT) so messages to that chat is displyed
@@ -37,7 +36,6 @@ export const ChatContainer = () => {
   if (!selectedUser._id) {
     return <div>No chats to display</div>;
   }
-
 
   return (
     <>           {/* if we use div then layout structure not comes */}

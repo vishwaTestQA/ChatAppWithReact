@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import cloudinary from "../config/cloudinary.js";
 import { getIO, socketsForUsers } from "../config/socket.js";
 import Message from "../model/message.model.js";
@@ -6,7 +7,12 @@ import { User } from "../model/user.model.js";
 export const getUsersForSideBar = async(req, res) =>{
   //fetch all the users except ourself
   try {
+
+    // Even though loggedInUser may look like an ObjectId ("66163e2b..."), it’s a string, and $ne doesn’t match properly unless the types match exactly.
     const loggedInUser = res.user._id;
+
+    // const loggedInUser = mongoose.Types.ObjectId(req.user._id)
+    console.log("loggedInUser",loggedInUser);
 
     //selects all users except "loggedInUser" so that we used $ne (notequal) and we no need to send password to the client
     const filterUsers = await User.find({_id: {$ne: loggedInUser}}).select("-password")
@@ -75,6 +81,6 @@ export const sendMessage = async(req, res) => {
   getIO().to(socketsForUsers.get(receiverId)).emit('message', newMessage)
 
 } catch (error) {
-    res.status(500).json({error: "internal server error"})
+    res.status(500).json({error: `internal server error ${error}`})
 }
 }   
